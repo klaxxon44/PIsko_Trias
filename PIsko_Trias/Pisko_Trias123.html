@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Position Object</title>
+<style>
+    body {
+        background-color: rgba(196, 190, 252, 255);
+    }
+    #random-object {
+        width: 150px;
+        height: 150px;
+        background-image: url('https://img.freepik.com/premium-vector/gold-coin-pixel-art_553915-81.jpg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        cursor: pointer;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.25s, height 0.25s;
+    }
+</style>
+</head>
+<body>
+
+<div id="random-object"></div>
+<p id="click-count">Монет: 0</p>
+
+<script>
+    let randomObject = document.getElementById('random-object');
+    let clickCountDisplay = document.getElementById('click-count');
+    let clickCount = 0;
+
+    randomObject.addEventListener('click', () => {
+        let randomX = Math.floor(Math.random() * (window.innerWidth - randomObject.offsetWidth));
+        let randomY = Math.floor(Math.random() * (window.innerHeight - randomObject.offsetHeight));
+
+        randomObject.style.left = randomX + 'px';
+        randomObject.style.top = randomY + 'px';
+        randomObject.style.width = (randomObject.offsetWidth + 20) + 'px';
+        randomObject.style.height = (randomObject.offsetHeight + 20) + 'px';
+
+        setTimeout(() => {
+            randomObject.style.width = (randomObject.offsetWidth - 20) + 'px';
+            randomObject.style.height = (randomObject.offsetHeight - 20) + 'px';
+        }, 250);
+
+        clickCount++;
+        clickCountDisplay.textContent = `Монет: ${clickCount}`;
+    });
+</script>
+
+</body>
+</html>
